@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--上面的为约束文件-->
+
+<!--Mybatis的主配置文件-->
+<configuration>
+    <!--配置四个基本信息的URI-->
+    <properties resource="jdbcConfig.properties">
+    </properties>
+    <!--配置环境-->
+    <environments default="mysql"><!--default自定义-->
+        <!--配置mysql的环境-->
+        <environment id="mysql"><!--id要和上面的default一样-->
+            <!--配置事务的类型-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--配置数据源（连接池）-->
+            <dataSource type="POOLED">
+                <!--配置连接数据库的4个基本信息-->
+                <property name="driver" value="${driver}"/><!--Mysql驱动路径-->
+                <property name="url" value="${url}"/><!--Mysql数据库路径-->
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--指定映射配置文件的位置，映射配置文件指的是每个dao独立的配置文件-->
+    <mappers>
+        <!--本来如果我们没有用注解的形式（而是XML形式），那么下面的子标签mapper应该用resource属
+        性，同时该属性后面的值应该诸如"com/dao/XXX.xml"的形式，现在既然是注解，那么就应该用class
+        属性，同时该属性后面的值应该是接口类的全路径-->
+        <!--也可以用package标签，它有一个属性name，后面的值应该是一个包的全路径，这样就可以扫描这
+        个包下的所有XXXDao.java文件，例如:<package name="com.dao" />-->
+        <mapper class="com.dao.AccountDao"></mapper>
+    </mappers>
+</configuration>
