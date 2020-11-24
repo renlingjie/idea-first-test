@@ -14,6 +14,7 @@ import java.util.List;
 public class MybatisTest {
     @Test
     public void run() throws IOException {
+        System.out.println("github测试");
         //1、加载Mybatis的配置文件
         InputStream in = Resources.getResourceAsStream("SqlMapConfig.xml");
         //2、创建SqlSessionFactory对象
